@@ -94,28 +94,11 @@ mySel2.onchange();
 
 
    <!-- selezione data  -->
-<div class="form-group">
-  <div  style ="text-align:center;">
-    <label class="lab" for="first_name">Requested Date and Hour</label> 
-  </div>
-  <!-- <select class="form-control form-control-sm" type="Text" id="mySelectList" name="Date_Select" required> -->
-<select class="option" type="Text" id="mySelectList" name="Date_Select" required >
-
+<div>
+   <h1>Seleziona un'opzione</h1>
+    <select id="dropdown">
+        <option value="">Seleziona...</option>
     </select>
-    <script>
-      (function () {
-        google.script.run.withSuccessHandler(
-          function (selectList) {
-            var select = document.getElementById("mySelectList");
-            for( var i=0; i<selectList.length; i++ ) {
-              var option = document.createElement("option");
-              option.text = selectList[i][0];
-              select.add(option);
-            }
-          }
-        ).getSelectList();
-      }());
-    </script>
 </div>
 
 <!-- selezione materie  -->
