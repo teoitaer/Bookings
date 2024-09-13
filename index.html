@@ -61,7 +61,10 @@
           var dropdown = document.getElementById('dropdown');
           
           // Richiesta per ottenere i dati
-          fetch(scriptUrl)
+          
+ fetch(scriptUrl, { 
+          method: 'GET' // Assicurati che il metodo sia GET
+        })
             .then(response => response.json())
             .then(data => {
               // Assicurati che i dati siano validi
