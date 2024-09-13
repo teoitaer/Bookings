@@ -50,42 +50,35 @@
 
       <button type="submit" class="btn btn-primary" onclick="sendData()">Submit</button>
 
-      
       <script>
         // URL dell'app web di Google Apps Script
-        var scriptUrl = 'https://script.google.com/macros/s/AKfycbwV7vV8BaFH0ZgKqqEEXXAvPz45tXGJ8ausvFqcUsA6eChPpyuorI5MEreV-Ying47J/exec';
+        var scriptUrl = 'https://script.google.com/macros/s/AKfycby0nPgVHIaUnVrmFAZgqwpaX9xMrZsF6PQiupidf6GZEnXPu_ZRvg30KCUlSmBCOfcU/exec';
 
-        
         // Funzione per popolare il dropdown
         function populateDropdown() {
           var dropdown = document.getElementById('dropdown');
           
-          // Richiesta per ottenere i dati
-          
- fetch(scriptUrl, { 
-          method: 'GET' // Assicurati che il metodo sia GET
-        })
-            .then(response => response.json())
-            .then(data => {
-              // Assicurati che i dati siano validi
-              if (Array.isArray(data)) {
-                data.forEach(item => {
-                  var option = document.createElement('option');
-                  option.value = item;
-                  option.textContent = item;
-                  dropdown.appendChild(option);
-                });
-              }
-            })
-            .catch(error => console.error('Errore:', error));
+          fetch(scriptUrl, { 
+            method: 'GET' // Assicurati che il metodo sia GET
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Assicurati che i dati siano validi
+            if (Array.isArray(data)) {
+              data.forEach(item => {
+                var option = document.createElement('option');
+                option.value = item;
+                option.textContent = item;
+                dropdown.appendChild(option);
+              });
+            }
+          })
+          .catch(error => console.error('Errore:', error));
         }
         
         // Chiama la funzione per popolare il dropdown quando la pagina viene caricata
         document.addEventListener('DOMContentLoaded', populateDropdown);
 
-
-
-        
         // Funzione per inviare i dati
         function sendData() {
           var firstName = document.getElementById('first_name').value;
@@ -93,7 +86,7 @@
           var email = document.getElementById('email').value;
           var dropdownValue = document.getElementById('dropdown').value;
           var subject = document.getElementById('Selezione_Materie').value;
-          
+
           fetch(scriptUrl, {
             method: 'POST',
             headers: {
