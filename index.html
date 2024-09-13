@@ -49,11 +49,12 @@
       </div>
 
       <button type="submit" class="btn btn-primary" onclick="sendData()">Submit</button>
-      <a href="https://docs.google.com/forms/d/13GZkeb1gVgzN766JVBCUDvBLszpKs_dX6XY6clGPFiE/viewform" target="_blank" class="button">Apri Modulo</a>
 
+      
       <script>
         // URL dell'app web di Google Apps Script
         var scriptUrl = 'https://script.google.com/macros/s/AKfycbwV7vV8BaFH0ZgKqqEEXXAvPz45tXGJ8ausvFqcUsA6eChPpyuorI5MEreV-Ying47J/exec';
+
         
         // Funzione per popolare il dropdown
         function populateDropdown() {
@@ -79,6 +80,9 @@
         // Chiama la funzione per popolare il dropdown quando la pagina viene caricata
         document.addEventListener('DOMContentLoaded', populateDropdown);
 
+
+
+        
         // Funzione per inviare i dati
         function sendData() {
           var firstName = document.getElementById('first_name').value;
