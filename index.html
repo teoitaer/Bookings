@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <title>PA BOOKINGS</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="home" class="flex-center flex-column">
+        <h1>PA BOOKINGS</h1>
+
+
+
+<!-- codice per quiz -->
+
+<!-- 
+<label class="lab" for="subject-selection">SELECT SUBJECT:</label>
+<select class="option" name="optionlist" id="subjectsel" onChange="combo(this, 'subject')">
+<option value="">--Select subject--</option>
+<option>AL ENG</option>
+<option>AGK ENG</option>
+<option>POF ENG</option>
+<option>COM ENG</option> 
+<option>OPS ENG</option>
+<option>HPL ENG</option>
+<option>NAV ENG</option>
+<option>FPP ENG</option>
+<option>MET ENG</option>
+
+</select>
+
+
+
+ //  salva il valore inserito nella combobox subjectsel 
+
+<script>
+const mySel2 = document.getElementById("subjectsel"); 
+mySel2.addEventListener("change",function() { 
+  localStorage.setItem("secValue",this.value); // save it 
+}); 
+let val2 = localStorage.getItem("secValue"); 
+if (val2) mySel2.value=val2; // set the dropdown 
+// trigger the change in case there are other events on the select 
+mySel2.onchange();  
+</script>
+
+
+
+
+//fine codice per quiz
+
+-->
+
+
+
+<div class="form-group">
+ <div  style ="text-align:center;">
+    <label class="lab" for="first_name">First Name</label> 
+  </div>
+    <input class="form-control form-control-sm" type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+  </div>
+
+
+  <div class="form-group">
+    <div  style ="text-align:center;">
+    <label class="lab" for="first_name">Last Name</label> 
+  </div>
+    <input class="form-control form-control-sm" type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+  </div>
+
+
+
+  <!-- <div class="form-group">
+    <label for="gender">Gender</label>
+    <select class="form-control form-control-sm" id="gender" name="gender" required>
+      <option value="" selected>Choose...</option>
+      <option value="Male">Male</option>
+      <option value="Female">Femle</option>
+    </select>
+  </div> -->
+
+
+ <div class="form-group">
+   <div  style ="text-align:center;">
+    <label class="lab" for="first_name">Email</label> 
+  </div>
+    <input class="form-control form-control-sm" type="email" class="form-control" id="email" name="email" placeholder="email">
+  </div>
+
+
+
+   <!-- selezione data  -->
+<div class="form-group">
+  <div  style ="text-align:center;">
+    <label class="lab" for="first_name">Requested Date and Hour</label> 
+  </div>
+  <!-- <select class="form-control form-control-sm" type="Text" id="mySelectList" name="Date_Select" required> -->
+<select class="option" type="Text" id="mySelectList" name="Date_Select" required >
+
+    </select>
+    <script>
+      (function () {
+        google.script.run.withSuccessHandler(
+          function (selectList) {
+            var select = document.getElementById("mySelectList");
+            for( var i=0; i<selectList.length; i++ ) {
+              var option = document.createElement("option");
+              option.text = selectList[i][0];
+              select.add(option);
+            }
+          }
+        ).getSelectList();
+      }());
+    </script>
+</div>
+
+<!-- selezione materie  -->
+ <div class="form-group">
+    <div  style ="text-align:center;">
+    <label class="lab" for="first_name">Select Subject</label> 
+  </div>
+    <input class="form-control form-control-sm" type="text" class="form-control" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie">
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+      
+
+
+
+
+
+      </div>
+    </div>
+  </body>
+</html>
