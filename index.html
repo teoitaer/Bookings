@@ -130,7 +130,32 @@ mySel2.onchange();
         <a href="https://docs.google.com/forms/d/13GZkeb1gVgzN766JVBCUDvBLszpKs_dX6XY6clGPFiE/viewform" target="_blank" class="button">Apri Modulo</a>
         
 
-      
+       
+    <script>
+        // URL dell'app web di Google Apps Script
+        var scriptUrl = 'https://script.google.com/macros/s/AKfycbytztSYbIVYN8b3tfAg-_TEyXbZlesf-ppqdjrQeZulkRFqCbqHT5hmT0NjIju7D60q/exec';
+        
+        // Funzione per popolare il dropdown
+        function populateDropdown() {
+            var dropdown = document.getElementById('dropdown');
+            
+            // Richiesta per ottenere i dati
+            fetch(scriptUrl)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        var option = document.createElement('option');
+                        option.value = item;
+                        option.textContent = item;
+                        dropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Errore:', error));
+        }
+        
+        // Chiama la funzione per popolare il dropdown quando la pagina viene caricata
+        document.addEventListener('DOMContentLoaded', populateDropdown);
+    </script>
 
 
 
