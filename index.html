@@ -38,29 +38,29 @@
 
         <div class="form-group">
           <label for="Selezione_Materie">Select Subject</label>
-          <input type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required>
+          <input type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required readonly>
         </div>
 
         <div class="form-group">
-        <label>Select Subject</label>
-        <div class="checkbox-container">
-          <div class="checkbox-group">
-            <label><input type="checkbox" name="subjects" value="AL"> AL</label>
-            <label><input type="checkbox" name="subjects" value="AGK"> AGK</label>
-            <label><input type="checkbox" name="subjects" value="POF"> POF</label>
-            <label><input type="checkbox" name="subjects" value="COM"> COM</label>
-            <label><input type="checkbox" name="subjects" value="MET"> MET</label>
-            <label><input type="checkbox" name="subjects" value="FPP"> FPP</label>
-            <label><input type="checkbox" name="subjects" value="PERF"> PERF</label>
-            <label><input type="checkbox" name="subjects" value="INS"> INS</label>
-            <label><input type="checkbox" name="subjects" value="GNAV"> GNAV</label>
-            <label><input type="checkbox" name="subjects" value="RNAV"> RNAV</label>
-            <label><input type="checkbox" name="subjects" value="HPL"> HPL</label>
-            <label><input type="checkbox" name="subjects" value="OPS"> OPS</label>
-            <label><input type="checkbox" name="subjects" value="MB"> MB</label>
+          <label>Select Subject</label>
+          <div class="checkbox-container">
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="subjects" value="AL"> AL</label>
+              <label><input type="checkbox" name="subjects" value="AGK"> AGK</label>
+              <label><input type="checkbox" name="subjects" value="POF"> POF</label>
+              <label><input type="checkbox" name="subjects" value="COM"> COM</label>
+              <label><input type="checkbox" name="subjects" value="MET"> MET</label>
+              <label><input type="checkbox" name="subjects" value="FPP"> FPP</label>
+              <label><input type="checkbox" name="subjects" value="PERF"> PERF</label>
+              <label><input type="checkbox" name="subjects" value="INS"> INS</label>
+              <label><input type="checkbox" name="subjects" value="GNAV"> GNAV</label>
+              <label><input type="checkbox" name="subjects" value="RNAV"> RNAV</label>
+              <label><input type="checkbox" name="subjects" value="HPL"> HPL</label>
+              <label><input type="checkbox" name="subjects" value="OPS"> OPS</label>
+              <label><input type="checkbox" name="subjects" value="MB"> MB</label>
+            </div>
           </div>
         </div>
-      </div>
 
         <button type="submit" id="submit" class="btn">Submit</button>
       </form>
@@ -95,6 +95,18 @@
     // Chiama la funzione per popolare il dropdown quando la pagina viene caricata
     document.addEventListener('DOMContentLoaded', populateDropdown);
 
+    // Funzione per aggiornare la textbox con le checkbox selezionate
+    function updateSubjectTextbox() {
+      const checkboxes = document.querySelectorAll('input[name="subjects"]:checked');
+      const selectedSubjects = Array.from(checkboxes).map(cb => cb.parentElement.textContent.trim()).join(', ');
+      document.getElementById('Selezione_Materie').value = selectedSubjects;
+    }
+
+    // Aggiungi listener a tutte le checkbox
+    document.querySelectorAll('input[name="subjects"]').forEach(checkbox => {
+      checkbox.addEventListener('change', updateSubjectTextbox);
+    });
+
     // Funzione per inviare i dati
     const form = document.querySelector("#booking-form");
     const submitButton = document.querySelector("#submit");
@@ -104,7 +116,7 @@
       submitButton.disabled = true;
 
       // Converti i dati delle checkbox in una stringa separata da virgole
-      const checkboxes = document.querySelectorAll('input[name="checkbox-subjects"]:checked');
+      const checkboxes = document.querySelectorAll('input[name="subjects"]:checked');
       const selectedSubjects = Array.from(checkboxes).map(cb => cb.value).join(', ');
 
       // Aggiungi i dati delle checkbox al FormData
