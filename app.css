@@ -1,95 +1,94 @@
 :root {
   background-color: #d1e0b8;
-  font-size: 62.5%;
+  font-size: 62.5%; /* Imposta la dimensione del font a 10px */
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* Include padding e border nella larghezza totale */
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
   color: #333;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  margin-bottom: 1rem;
-}
-
 h1 {
   font-size: 5.4rem;
   color: #819c49;
   margin-bottom: 5rem;
+  text-align: center; /* Centro il testo del titolo */
 }
 
-h1 > span {
-  font-size: 2.4rem;
-  font-weight: 500;
-}
-
-h2 {
-  font-size: 2.4rem;
-  margin-bottom: 4rem;
-  font-weight: 700;
-}
-
-h3 {
-  font-size: 2.8rem;
-  font-weight: 500;
-}
-
-/* UTILITIES */
-
-.container {
-  width: 100vw;
-  height: 100vh;
+form {
+  width: 100%;
+  max-width: 40rem; /* Imposta una larghezza massima per il modulo */
+  margin: 0 auto; /* Centra il modulo orizzontalmente */
   display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 80rem;
-  margin: 0 auto;
+  flex-direction: column;
+  align-items: center; /* Centro gli elementi orizzontalmente */
   padding: 2rem;
 }
 
-.container > * {
-  width: 100%;
-}
-
-.flex-column {
+.form-group {
+  width: 100%; /* Occupa tutta la larghezza del modulo */
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center; /* Centro gli elementi all'interno del gruppo */
 }
 
-.flex-center {
-  justify-content: center;
-  align-items: center;
+.form-group label {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center; /* Centro il testo dell'etichetta */
+  color: #475729;
 }
 
-.justify-center {
-  justify-content: center;
+.form-control {
+  width: 100%; /* Occupa tutta la larghezza del contenitore */
+  max-width: 30rem; /* Imposta la larghezza massima per input e select */
+  padding: 1rem;
+  font-size: 1.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center; /* Centro il testo del campo */
 }
 
-.text-center {
-  text-align: center;
+input,
+select {
+  width: 100%; /* Occupa tutta la larghezza del contenitore */
+  max-width: 30rem; /* Imposta la larghezza massima */
+  padding: 1rem;
+  font-size: 1.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  text-align: center; /* Centro il testo e i placeholder */
 }
 
-.hidden {
-  display: none;
+select {
+  height: auto; /* Imposta altezza automatica per adattarsi al contenuto */
 }
 
-/* BUTTONS */
+input::placeholder,
+select::placeholder {
+  text-align: center; /* Centro il testo del placeholder */
+}
+
 .btn {
   font-size: 1.8rem;
   padding: 1rem 0;
-  width: 20rem;
+  width: 100%; /* Occupa tutta la larghezza del contenitore */
+  max-width: 20rem; /* Limita la larghezza massima */
   text-align: center;
   border: 0.1rem solid #819c49;
   margin-bottom: 1rem;
   text-decoration: none;
   color: #819c49;
   background-color: #f4f7ee;
+  border-radius: 4px;
 }
 
 .btn:hover {
@@ -105,57 +104,5 @@ h3 {
   transform: none;
 }
 
-/* FORM ELEMENTS */
-input,
-select {
-  width: 100%; /* Occupa tutta la larghezza del contenitore */
-  padding: 1rem; /* Spazio interno per input e select */
-  font-size: 1.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box; /* Include padding e border nella larghezza totale */
-  margin-bottom: 1rem;
-}
 
-input {
-  box-shadow: 0 0.4rem 1.4rem 0 rgba(14, 17, 8, 0.5);
-}
 
-input::placeholder {
-  color: #aaa;
-}
-
-select {
-  height: 3em; /* Imposta l'altezza per la dropdown */
-  appearance: none; /* Rimuove la stilizzazione di default del browser (opzionale) */
-}
-
-/* LABELS */
-.lab {
-  font-size: 1.5rem;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  font-weight: 300;
-  color: #475729;
-  text-align: center;
-}
-
-/* FORMS */
-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* Allinea orizzontalmente al centro */
-}
-
-/* COMBOBOX */
-.option {
-  font-size: 1.8rem;
-  padding: 1rem;
-  width: 100%; /* Occupa tutta la larghezza disponibile */
-  text-align: center;
-  border: 0.1rem solid rgb(176, 198, 134, 0.25);
-  background-color: #f4f7ee;
-  color: #819c49;
-}
