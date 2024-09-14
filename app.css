@@ -162,7 +162,8 @@ form {
     }
 
     select {
-      height: 2.5em; /* Imposta l'altezza per la dropdown */
+      height: 3em; /* Imposta l'altezza per la dropdown */
+      width: 100%; /* Occupa tutta la larghezza disponibile */
       appearance: none; /* Rimuove la stilizzazione di default del browser (opzionale) */
     }
 
