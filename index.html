@@ -10,35 +10,45 @@
 </head>
 <body>
   <div class="container">
-    <h1>PA BOOKINGS</h1>
+    <div id="home" class="flex-center flex-column">
+      <h1>PA BOOKINGS</h1>
 
-    <form id="booking-form">
-      <div class="form-group">
-        <label for="first_name">First Name</label>
-        <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
-      </div>
+      <form id="booking-form">
+        <div class="form-group">
+          <div style="text-align:center;">
+            <label class="lab" for="first_name">First Name</label>
+          </div>
+          <input class="form-control form-control-sm" type="text" id="first_name" name="first_name" placeholder="First Name" required>
+        </div>
 
-      <div class="form-group">
-        <label for="last_name">Last Name</label>
-        <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
-      </div>
+        <div class="form-group">
+          <div style="text-align:center;">
+            <label class="lab" for="last_name">Last Name</label>
+          </div>
+          <input class="form-control form-control-sm" type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+        </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Email" required>
-      </div>
+        <div class="form-group">
+          <div style="text-align:center;">
+            <label class="lab" for="email">Email</label>
+          </div>
+          <input class="form-control form-control-sm" type="email" id="email" name="email" placeholder="Email" required>
+        </div>
 
-      <div class="form-group">
-        <label for="dropdown">Select a Date</label>
-        <select id="dropdown" name="option" required>
-          <option value="">Seleziona...</option>
-        </select>
-      </div>
+        <div class="form-group">
+          <div style="text-align:center;">
+            <label class="lab" for="dropdown">Select a Date</label>
+          </div>
+          <select id="dropdown" name="option" required>
+            <option value="">Seleziona...</option>
+          </select>
+        </div>
 
-      <div class="form-group">
-        <label>Select Subject</label>
-        <div class="checkbox-container">
-          <div class="checkbox-group">
+        <div class="form-group">
+          <div style="text-align:center;">
+            <label class="lab">Select Subjects</label>
+          </div>
+          <div id="checkbox-group" style="display: flex; flex-wrap: wrap; gap: 10px;">
             <label><input type="checkbox" name="subjects" value="AL"> AL</label>
             <label><input type="checkbox" name="subjects" value="AGK"> AGK</label>
             <label><input type="checkbox" name="subjects" value="POF"> POF</label>
@@ -54,67 +64,49 @@
             <label><input type="checkbox" name="subjects" value="MB"> MB</label>
           </div>
         </div>
-      </div>
 
-      <button type="submit" class="btn">Submit</button>
-    </form>
-  </div>
+        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+      </form>
 
-  <script>
-    var scriptUrl = 'https://script.google.com/macros/s/AKfycbzHfaAjuNCHNt5202xEuBjs579D8YLA1f-aL9FhvH2cCz84EvjPHbnYnMEcagplje0O/exec';
+      <script>
+        // URL dell'app web di Google Apps Script
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbwV7vV8BaFH0ZgKqqEEXXAvPz45tXGJ8ausvFqcUsA6eChPpyuorI5MEreV-Ying47J/exec';
+        const form = document.querySelector("#booking-form");
+        const submitButton = document.querySelector("#submit");
 
-    function populateDropdown() {
-      var dropdown = document.getElementById('dropdown');
-      fetch(scriptUrl, { method: 'GET' })
-        .then(response => response.json())
-        .then(data => {
-          if (Array.isArray(data)) {
-            data.forEach(item => {
-              var option = document.createElement('option');
-              option.value = item;
-              option.textContent = item;
-              dropdown.appendChild(option);
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+          submitButton.disabled = true;
+          
+          // Converti i dati delle checkbox in una stringa separata da virgole
+          const checkboxes = document.querySelectorAll('input[name="subjects"]:checked');
+          const selectedSubjects = Array.from(checkboxes).map(cb => cb.value).join(', ');
+
+          // Aggiungi i dati delle checkbox al FormData
+          const requestBody = new FormData(form);
+          requestBody.append('subjects', selectedSubjects);
+
+          fetch(scriptUrl, { method: 'POST', body: requestBody })
+            .then(response => {
+              if (response.ok) {
+                return response.text(); // Modificato per gestire la risposta come testo
+              } else {
+                throw new Error('Server responded with an error: ' + response.statusText);
+              }
+            })
+            .then(text => {
+              alert('Success: ' + text);
+              form.reset(); // Resetta il modulo
+              submitButton.disabled = false;
+            })
+            .catch(error => {
+              alert('Error: ' + error.message);
+              submitButton.disabled = false;
             });
-          }
-        })
-        .catch(error => console.error('Errore:', error));
-    }
-
-    document.addEventListener('DOMContentLoaded', populateDropdown);
-
-    document.getElementById('booking-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      var firstName = document.getElementById('first_name').value;
-      var lastName = document.getElementById('last_name').value;
-      var email = document.getElementById('email').value;
-      var dropdownValue = document.getElementById('dropdown').value;
-      var subjectElements = document.querySelectorAll('input[name="subjects"]:checked');
-      var subjects = Array.from(subjectElements).map(el => el.value);
-
-      fetch(scriptUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ 
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          dropdown: dropdownValue,
-          subjects: subjects
-        })
-      })
-      .then(response => response.text())
-      .then(data => {
-        alert('Dati inviati con successo!');
-        document.getElementById('booking-form').reset();
-      })
-      .catch(error => {
-        console.error('Errore:', error);
-        alert('Errore durante l\'invio dei dati.');
-      });
-    });
-  </script>
+        });
+      </script>
+    </div>
+  </div>
 </body>
 </html>
+
