@@ -86,27 +86,30 @@
 
 
         const form = document.querySelector("#form");
-        const submitButton = document.querySelector("#submit");
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwOJAK9U7gZoXfnW7RY5FH4Vs_bBYO9tm0GNpg6juiXFFBeF4L52UzbkFSBH0Pnr6YX/exec';
+  const submitButton = document.querySelector("#submit");
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwOJAK9U7gZoXfnW7RY5FH4Vs_bBYO9tm0GNpg6juiXFFBeF4L52UzbkFSBH0Pnr6YX/exec';
 
-        form.addEventListener('submit', e => {
-          submitButton.disabled = true;
-          e.preventDefault();
-          let requestBody = new FormData(form);
-          fetch(scriptURL, { method: 'POST', body: requestBody })
-            .then(response => {
-              if (response.ok) {
-                alert('Success!');
-              } else {
-                alert('Error: ' + response.statusText);
-              }
-              submitButton.disabled = false;
-            })
-            .catch(error => {
-              alert('Error: ' + error.message);
-              submitButton.disabled = false;
-            });
-        });
+  form.addEventListener('submit', e => {
+    submitButton.disabled = true;
+    e.preventDefault();
+    let requestBody = new FormData(form);
+    fetch(scriptURL, { method: 'POST', body: requestBody })
+      .then(response => {
+        if (response.ok) {
+          return response.text(); // Modificato per gestire la risposta come testo
+        } else {
+          throw new Error('Server responded with an error: ' + response.statusText);
+        }
+      })
+      .then(text => {
+        alert('Success: ' + text);
+        submitButton.disabled = false;
+      })
+      .catch(error => {
+        alert('Error: ' + error.message);
+        submitButton.disabled = false;
+      });
+  });
 
 
 
