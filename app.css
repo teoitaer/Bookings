@@ -1,5 +1,5 @@
 :root {
-  --background-color: #fafafa; /* Colore di sfondo chiaro simile a Instagram */
+  --background-color: #fafafa; /* Colore di sfondo chiaro */
   --form-background: #ffffff; /* Colore di sfondo del modulo */
   --input-border: #dbdbdb; /* Colore del bordo degli input */
   --button-color: #0095f6; /* Colore del pulsante */
@@ -25,7 +25,7 @@ body {
   height: 100vh;
 }
 
-.form-container {
+.form-wrapper {
   width: 100%;
   max-width: 40rem; /* Imposta una larghezza massima per il modulo */
   background-color: var(--form-background); /* Colore di sfondo del modulo */
@@ -39,7 +39,7 @@ body {
 }
 
 h1 {
-  font-size: 3rem; /* Dimensione del font per il titolo */
+  font-size: 2.5rem; /* Dimensione del font per il titolo */
   color: var(--text-color);
   margin-bottom: 2rem;
   text-align: center;
@@ -63,7 +63,6 @@ h1 {
 input,
 select {
   width: 100%;
-  max-width: 30rem; /* Imposta la larghezza massima */
   padding: 1rem;
   font-size: 1.6rem; /* Dimensione del font */
   border: 1px solid var(--input-border); /* Colore del bordo */
@@ -102,17 +101,16 @@ select::placeholder {
   cursor: not-allowed;
 }
 
-#checkbox-group {
+.checkbox-container {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap; /* Consente la disposizione su più righe */
+  gap: 1rem; /* Spazio tra le colonne di checkbox */
   width: 100%;
-  margin-bottom: 1.5rem; /* Spazio tra i checkbox e il resto del modulo */
 }
 
 .checkbox-column {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* Spazio tra le checkbox */
   width: 48%; /* Due colonne occupano insieme il 100% */
 }
 
