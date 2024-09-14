@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
   <title>PA BOOKINGS</title>
   <link rel="stylesheet" href="app.css" />
 </head>
@@ -13,7 +13,7 @@
     <div id="home" class="flex-center flex-column">
       <h1>PA BOOKINGS</h1>
 
-      <form id="booking-form">
+      <form id="booking-form" action="https://script.google.com/macros/s/AKfycbyb2w90f-hLe6twosC7jcmkzL7tRHYJfYfqO99PGxp879Rivk__408BchcsCyYdcSZR/exec" method="POST">
         <div class="form-group">
           <div style="text-align:center;">
             <label class="lab" for="first_name">First Name</label>
@@ -36,9 +36,9 @@
         </div>
 
         <div class="form-group">
-          <div style="text-align:center;">
-            <label class="lab" for="dropdown">Select a Date</label>
-          </div>
+           <div style="text-align:center;">
+     <label class="lab" for="dropdown">Select a Date</label>
+            </div>
           <select id="dropdown" name="option" required>
             <option value="">Seleziona...</option>
           </select>
@@ -46,23 +46,9 @@
 
         <div class="form-group">
           <div style="text-align:center;">
-            <label class="lab">Select Subjects</label>
+            <label class="lab" for="Selezione_Materie">Select Subject</label>
           </div>
-          <div id="checkbox-group" style="display: flex; flex-wrap: wrap; gap: 10px;">
-            <label><input type="checkbox" name="subjects" value="AL"> AL</label>
-            <label><input type="checkbox" name="subjects" value="AGK"> AGK</label>
-            <label><input type="checkbox" name="subjects" value="POF"> POF</label>
-            <label><input type="checkbox" name="subjects" value="COM"> COM</label>
-            <label><input type="checkbox" name="subjects" value="MET"> MET</label>
-            <label><input type="checkbox" name="subjects" value="FPP"> FPP</label>
-            <label><input type="checkbox" name="subjects" value="PERF"> PERF</label>
-            <label><input type="checkbox" name="subjects" value="INS"> INS</label>
-            <label><input type="checkbox" name="subjects" value="GNAV"> GNAV</label>
-            <label><input type="checkbox" name="subjects" value="RNAV"> RNAV</label>
-            <label><input type="checkbox" name="subjects" value="HPL"> HPL</label>
-            <label><input type="checkbox" name="subjects" value="OPS"> OPS</label>
-            <label><input type="checkbox" name="subjects" value="MB"> MB</label>
-          </div>
+          <input class="form-control form-control-sm" type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required>
         </div>
 
         <button type="submit" id="submit" class="btn btn-primary">Submit</button>
@@ -70,22 +56,40 @@
 
       <script>
         // URL dell'app web di Google Apps Script
-        const scriptUrl = 'https://script.google.com/macros/s/AKfycbxJ5lQt--_jrd4XdJFkJ4Xav8vaEpciLd-W6oNyVuXb38k2IvIhHeyCDFjT24e2Kj71/exec';
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbyb2w90f-hLe6twosC7jcmkzL7tRHYJfYfqO99PGxp879Rivk__408BchcsCyYdcSZR/exec';
+
+        // Funzione per popolare il dropdown
+        function populateDropdown() {
+          const dropdown = document.getElementById('dropdown');
+          
+          fetch(scriptUrl, { 
+            method: 'GET'
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (Array.isArray(data)) {
+              data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item;
+                option.textContent = item;
+                dropdown.appendChild(option);
+              });
+            }
+          })
+          .catch(error => console.error('Errore:', error));
+        }
+        
+        // Chiama la funzione per popolare il dropdown quando la pagina viene caricata
+        document.addEventListener('DOMContentLoaded', populateDropdown);
+
+        // Funzione per inviare i dati
         const form = document.querySelector("#booking-form");
         const submitButton = document.querySelector("#submit");
 
         form.addEventListener('submit', e => {
-          e.preventDefault();
           submitButton.disabled = true;
-          
-          // Converti i dati delle checkbox in una stringa separata da virgole
-          const checkboxes = document.querySelectorAll('input[name="subjects"]:checked');
-          const selectedSubjects = Array.from(checkboxes).map(cb => cb.value).join(', ');
-
-          // Aggiungi i dati delle checkbox al FormData
+          e.preventDefault();
           const requestBody = new FormData(form);
-          requestBody.append('subjects', selectedSubjects);
-
           fetch(scriptUrl, { method: 'POST', body: requestBody })
             .then(response => {
               if (response.ok) {
@@ -96,7 +100,6 @@
             })
             .then(text => {
               alert('Success: ' + text);
-              form.reset(); // Resetta il modulo
               submitButton.disabled = false;
             })
             .catch(error => {
@@ -107,6 +110,8 @@
       </script>
     </div>
   </div>
+</body>
+</html>
 </body>
 </html>
 
