@@ -63,7 +63,7 @@
           fetch(scriptUrl, { 
             method: 'GET' // Assicurati che il metodo sia GET
           })
-          .then(response => response.json())
+          .then(response => response.text())
           .then(data => {
             // Assicurati che i dati siano validi
             if (Array.isArray(data)) {
