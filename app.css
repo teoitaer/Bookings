@@ -1,5 +1,11 @@
 :root {
-  background-color: #d1e0b8;
+  --background-color: #fafafa; /* Colore di sfondo chiaro simile a Instagram */
+  --form-background: #ffffff; /* Colore di sfondo del modulo */
+  --input-border: #dbdbdb; /* Colore del bordo degli input */
+  --button-color: #0095f6; /* Colore del pulsante */
+  --button-hover: #007ac9; /* Colore del pulsante al passaggio del mouse */
+  --text-color: #262626; /* Colore del testo principale */
+  --placeholder-color: #8e8e8e; /* Colore del testo del placeholder */
   font-size: 62.5%; /* Imposta la dimensione del font a 10px */
 }
 
@@ -8,101 +14,92 @@
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
-  color: #333;
+  color: var(--text-color);
+}
+
+body {
+  background-color: var(--background-color); /* Colore di sfondo della pagina */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 h1 {
-  font-size: 5.4rem;
-  color: #819c49;
-  margin-bottom: 5rem;
-  text-align: center; /* Centro il testo del titolo */
+  font-size: 3.6rem; /* Dimensione del font per il titolo */
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 form {
   width: 100%;
-  max-width: 40rem; /* Imposta una larghezza massima per il modulo */
-  margin: 0 auto; /* Centra il modulo orizzontalmente */
+  max-width: 35rem; /* Imposta una larghezza massima per il modulo */
+  background-color: var(--form-background); /* Colore di sfondo del modulo */
+  border: 1px solid var(--input-border); /* Bordo del modulo */
+  border-radius: 8px; /* Angoli arrotondati del modulo */
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Ombra leggera */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centro gli elementi orizzontalmente */
-  padding: 2rem;
+  align-items: center;
 }
 
 .form-group {
   width: 100%; /* Occupa tutta la larghezza del modulo */
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Spazio tra i campi del modulo */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centro gli elementi all'interno del gruppo */
 }
 
 .form-group label {
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.4rem; /* Dimensione del font per le etichette */
   margin-bottom: 0.5rem;
-  text-align: center; /* Centro il testo dell'etichetta */
-  color: #475729;
-}
-
-.form-control {
-  width: 100%; /* Occupa tutta la larghezza del contenitore */
-  max-width: 30rem; /* Imposta la larghezza massima per input e select */
-  padding: 1rem;
-  font-size: 1.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  text-align: center; /* Centro il testo del campo */
+  color: var(--text-color);
+  text-align: center;
 }
 
 input,
 select {
-  width: 100%; /* Occupa tutta la larghezza del contenitore */
+  width: 100%;
   max-width: 30rem; /* Imposta la larghezza massima */
   padding: 1rem;
-  font-size: 1.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 1.6rem; /* Dimensione del font */
+  border: 1px solid var(--input-border); /* Colore del bordo */
+  border-radius: 4px; /* Angoli arrotondati */
   box-sizing: border-box;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Spazio tra i campi del modulo */
   text-align: center; /* Centro il testo e i placeholder */
-}
-
-select {
-  height: auto; /* Imposta altezza automatica per adattarsi al contenuto */
 }
 
 input::placeholder,
 select::placeholder {
-  text-align: center; /* Centro il testo del placeholder */
+  color: var(--placeholder-color); /* Colore del testo del placeholder */
 }
 
 .btn {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   padding: 1rem 0;
-  width: 100%; /* Occupa tutta la larghezza del contenitore */
-  max-width: 20rem; /* Limita la larghezza massima */
+  width: 100%;
+  max-width: 30rem; /* Limita la larghezza massima */
   text-align: center;
-  border: 0.1rem solid #819c49;
-  margin-bottom: 1rem;
-  text-decoration: none;
-  color: #819c49;
-  background-color: #f4f7ee;
+  border: none;
   border-radius: 4px;
+  background-color: var(--button-color); /* Colore del pulsante */
+  color: #ffffff; /* Colore del testo del pulsante */
+  margin-bottom: 1.5rem; /* Spazio tra i pulsanti e gli altri elementi */
+  cursor: pointer;
 }
 
 .btn:hover {
-  cursor: pointer;
-  box-shadow: 0 0.4rem 1.4rem 0 rgba(14, 17, 8, 0.5);
-  transform: translateY(-0.1rem);
-  transition: transform 150ms;
+  background-color: var(--button-hover); /* Colore del pulsante al passaggio del mouse */
+  transition: background-color 0.3s ease;
 }
 
-.btn[disabled]:hover {
+.btn[disabled] {
+  background-color: #b2b2b2; /* Colore del pulsante disabilitato */
   cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
 }
-
 
 
