@@ -135,6 +135,13 @@ background-color: #f4f7ee;
   color: #475729;
 }
 
+.form-label {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
 
 /* FORMS */
 form {
