@@ -46,25 +46,32 @@
 
         <div class="form-group">
           <div style="text-align:center;">
+            <label class="lab" for="Selezione_Materie">Select Subject</label>
+          </div>
+          <input class="form-control form-control-sm" type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required>
+        </div>
+
+        <div class="form-group">
+          <div style="text-align:center;">
             <label class="lab">Select Subjects</label>
           </div>
           <div id="checkbox-group">
             <div class="checkbox-column">
-              <label><input type="checkbox" name="subjects" value="AL"> AL</label>
-              <label><input type="checkbox" name="subjects" value="AGK"> AGK</label>
-              <label><input type="checkbox" name="subjects" value="POF"> POF</label>
-              <label><input type="checkbox" name="subjects" value="INS"> INS</label>
-              <label><input type="checkbox" name="subjects" value="OPS"> OPS</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="AL"> AL</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="AGK"> AGK</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="POF"> POF</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="INS"> INS</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="OPS"> OPS</label>
             </div>
             <div class="checkbox-column">
-              <label><input type="checkbox" name="subjects" value="RNAV"> RNAV</label>
-              <label><input type="checkbox" name="subjects" value="GNAV"> GNAV</label>
-              <label><input type="checkbox" name="subjects" value="COM"> COM</label>
-              <label><input type="checkbox" name="subjects" value="MET"> MET</label>
-              <label><input type="checkbox" name="subjects" value="MB"> MB</label>
-              <label><input type="checkbox" name="subjects" value="FPP"> FPP</label>
-              <label><input type="checkbox" name="subjects" value="PERF"> PERF</label>
-              <label><input type="checkbox" name="subjects" value="HPL"> HPL</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="RNAV"> RNAV</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="GNAV"> GNAV</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="COM"> COM</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="MET"> MET</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="MB"> MB</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="FPP"> FPP</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="PERF"> PERF</label>
+              <label><input type="checkbox" name="checkbox-subjects" value="HPL"> HPL</label>
             </div>
           </div>
         </div>
@@ -109,12 +116,12 @@
           submitButton.disabled = true;
 
           // Converti i dati delle checkbox in una stringa separata da virgole
-          const checkboxes = document.querySelectorAll('input[name="subjects"]:checked');
+          const checkboxes = document.querySelectorAll('input[name="checkbox-subjects"]:checked');
           const selectedSubjects = Array.from(checkboxes).map(cb => cb.value).join(', ');
 
           // Aggiungi i dati delle checkbox al FormData
           const requestBody = new FormData(form);
-          requestBody.append('Selezione_Materie', selectedSubjects);
+          requestBody.set('Selezione_Materie', selectedSubjects);
 
           fetch(scriptUrl, { method: 'POST', body: requestBody })
             .then(response => {
