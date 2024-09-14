@@ -26,20 +26,20 @@ body {
 }
 
 h1 {
-  font-size: 3.6rem; /* Dimensione del font per il titolo */
+  font-size: 4.8rem; /* Aumenta la dimensione del font per il titolo */
   color: var(--text-color);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem; /* Aumenta lo spazio sotto il titolo */
   text-align: center;
 }
 
 form {
   width: 100%;
-  max-width: 35rem; /* Imposta una larghezza massima per il modulo */
+  max-width: 50rem; /* Imposta una larghezza massima maggiore per il modulo */
   background-color: var(--form-background); /* Colore di sfondo del modulo */
   border: 1px solid var(--input-border); /* Bordo del modulo */
   border-radius: 8px; /* Angoli arrotondati del modulo */
-  padding: 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Ombra leggera */
+  padding: 3rem; /* Aumenta lo spazio interno del modulo */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Ombra leggera */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,15 +47,15 @@ form {
 
 .form-group {
   width: 100%; /* Occupa tutta la larghezza del modulo */
-  margin-bottom: 1.5rem; /* Spazio tra i campi del modulo */
+  margin-bottom: 2rem; /* Aumenta lo spazio tra i campi del modulo */
   display: flex;
   flex-direction: column;
 }
 
 .form-group label {
   display: block;
-  font-size: 1.4rem; /* Dimensione del font per le etichette */
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem; /* Aumenta la dimensione del font per le etichette */
+  margin-bottom: 1rem; /* Aumenta lo spazio sotto l'etichetta */
   color: var(--text-color);
   text-align: center;
 }
@@ -63,13 +63,13 @@ form {
 input,
 select {
   width: 100%;
-  max-width: 30rem; /* Imposta la larghezza massima */
-  padding: 1rem;
-  font-size: 1.6rem; /* Dimensione del font */
+  max-width: 40rem; /* Imposta una larghezza massima maggiore per input e select */
+  padding: 1.5rem; /* Aumenta lo spazio interno */
+  font-size: 1.8rem; /* Aumenta la dimensione del font */
   border: 1px solid var(--input-border); /* Colore del bordo */
   border-radius: 4px; /* Angoli arrotondati */
   box-sizing: border-box;
-  margin-bottom: 1.5rem; /* Spazio tra i campi del modulo */
+  margin-bottom: 2rem; /* Aumenta lo spazio tra i campi del modulo */
   text-align: center; /* Centro il testo e i placeholder */
 }
 
@@ -79,16 +79,16 @@ select::placeholder {
 }
 
 .btn {
-  font-size: 1.6rem;
-  padding: 1rem 0;
+  font-size: 1.8rem; /* Aumenta la dimensione del font del pulsante */
+  padding: 1.5rem 0; /* Aumenta lo spazio interno */
   width: 100%;
-  max-width: 30rem; /* Limita la larghezza massima */
+  max-width: 40rem; /* Limita la larghezza massima del pulsante */
   text-align: center;
   border: none;
   border-radius: 4px;
   background-color: var(--button-color); /* Colore del pulsante */
   color: #ffffff; /* Colore del testo del pulsante */
-  margin-bottom: 1.5rem; /* Spazio tra i pulsanti e gli altri elementi */
+  margin-bottom: 2rem; /* Aumenta lo spazio sotto il pulsante */
   cursor: pointer;
 }
 
@@ -98,8 +98,8 @@ select::placeholder {
 }
 
 .btn[disabled] {
-  background-color: #b2b2b2; /* Colore del pulsante disabilitato */
-  cursor: not-allowed;
+  background-color: #b2b2b2;
+
 }
 
 
