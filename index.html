@@ -81,30 +81,53 @@
 
         // Funzione per inviare i dati
        
-   const form = document.querySelector("#form")
-   const submitButton = document.querySelector("#submit")
-   const scriptURL = 'https://script.google.com/macros/s/AKfycbwG9vCMBREFM4suhSiTdVPFu7-F-6JclKyZGGuKjFS-dqaZT6kKXS6r_15kub3YH2R5yw/exec'
 
-   form.addEventListener('submit', e => {
-     submitButton.disabled = true
-     e.preventDefault()
-     let requestBody = new FormData(form)
-     fetch(scriptURL, { method: 'POST', body: requestBody})
-       .then(response => {
-          alert('Success!', response)
-          submitButton.disabled = false
-         })
-       .catch(error => {
-       alert('Error!', error.message)
-         submitButton.disabled = false
+function sendData() {
+  const scriptUrl = 'https://script.google.com/macros/s/AKfycbwOJAK9U7gZoXfnW7RY5FH4Vs_bBYO9tm0GNpg6juiXFFBeF4L52UzbkFSBH0Pnr6YX/exec'; // Replace with your script URL
+  
+  fetch(scriptUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ 
+      first_name: document.getElementById('first_name').value,
+      last_name: document.getElementById('last_name').value,
+      email: document.getElementById('email').value,
+      dropdown: document.getElementById('dropdown').value,
+      subject: document.getElementById('Selezione_Materie').value
+    })
+  })
+  .then(response => {
+    if (!response.ok) {
+      // Handle HTTP errors
+      return response.text().then(text => {
+        throw new Error(`HTTP error! Status: ${response.status}, Response: ${text}`);
+      });
+    }
+    return response.text();
+  })
+  .then(data => {
+    alert('Dati inviati con successo!');
+    // Pulisci i campi dopo l'invio
+    document.getElementById('first_name').value = '';
+    document.getElementById('last_name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('dropdown').value = '';
+    document.getElementById('Selezione_Materie').value = '';
+  })
+  .catch(error => {
+    console.error('Errore:', error);
+    alert('Errore durante l\'invio dei dati.');
+  });
+}
 
-       }
-       )
-   })
 
         
       </script>
     </div>
   </div>
+</body>
+</html>
 </body>
 </html>
