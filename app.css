@@ -152,6 +152,22 @@ form {
 }
 
 
+
+ .form-control {
+      width: 100%; /* Occupa tutta la larghezza disponibile */
+      padding: 0.5em; /* Stessa dimensione di padding per input e select */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box; /* Include padding e border nella larghezza totale */
+    }
+
+    select {
+      height: 2.5em; /* Imposta l'altezza per la dropdown */
+      appearance: none; /* Rimuove la stilizzazione di default del browser (opzionale) */
+    }
+
+
+
 input {
   margin-bottom: 1rem;
   width: 20rem;
