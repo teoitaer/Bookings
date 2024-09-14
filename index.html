@@ -10,51 +10,39 @@
 </head>
 <body>
   <div class="container">
-    <div id="home" class="flex-center flex-column">
+    <div id="home" class="form-container">
       <h1>PA BOOKINGS</h1>
 
       <form id="booking-form" action="https://script.google.com/macros/s/AKfycbxvQPI7vC-iDfCdY-Vmp2Vfw1LsjIibLEwZNNwmJEjfCJjlyKP9oRpYXEtohnkSdq3z/exec" method="POST">
         <div class="form-group">
-          <div style="text-align:center;">
-            <label class="lab" for="first_name">First Name</label>
-          </div>
-          <input class="form-control form-control-sm" type="text" id="first_name" name="first_name" placeholder="First Name" required>
+          <label class="lab" for="first_name">First Name</label>
+          <input class="form-control" type="text" id="first_name" name="first_name" placeholder="First Name" required>
         </div>
 
         <div class="form-group">
-          <div style="text-align:center;">
-            <label class="lab" for="last_name">Last Name</label>
-          </div>
-          <input class="form-control form-control-sm" type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+          <label class="lab" for="last_name">Last Name</label>
+          <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Last Name" required>
         </div>
 
         <div class="form-group">
-          <div style="text-align:center;">
-            <label class="lab" for="email">Email</label>
-          </div>
-          <input class="form-control form-control-sm" type="email" id="email" name="email" placeholder="Email" required>
+          <label class="lab" for="email">Email</label>
+          <input class="form-control" type="email" id="email" name="email" placeholder="Email" required>
         </div>
 
         <div class="form-group">
-          <div style="text-align:center;">
-            <label class="lab" for="dropdown">Select a Date</label>
-          </div>
+          <label class="lab" for="dropdown">Select a Date</label>
           <select id="dropdown" name="option" required>
             <option value="">Seleziona...</option>
           </select>
         </div>
 
         <div class="form-group">
-          <div style="text-align:center;">
-            <label class="lab" for="Selezione_Materie">Select Subject</label>
-          </div>
-          <input class="form-control form-control-sm" type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required>
+          <label class="lab" for="Selezione_Materie">Select Subject</label>
+          <input class="form-control" type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required>
         </div>
 
         <div class="form-group">
-          <div style="text-align:center;">
-            <label class="lab">Select Subjects</label>
-          </div>
+          <label class="lab">Select Subjects</label>
           <div id="checkbox-group">
             <div class="checkbox-column">
               <label><input type="checkbox" name="checkbox-subjects" value="AL"> AL</label>
@@ -76,7 +64,7 @@
           </div>
         </div>
 
-        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" id="submit" class="btn">Submit</button>
       </form>
 
       <script>
