@@ -1,17 +1,16 @@
 :root {
-  --background-color: #fafafa; /* Colore di sfondo chiaro */
+  --background-color: #f7f7f7; /* Colore di sfondo chiaro */
   --form-background: #ffffff; /* Colore di sfondo del modulo */
-  --input-border: #dbdbdb; /* Colore del bordo degli input */
-  --button-color: #0095f6; /* Colore del pulsante */
-  --button-hover: #007ac9; /* Colore del pulsante al passaggio del mouse */
-  --text-color: #262626; /* Colore del testo principale */
-  --placeholder-color: #8e8e8e; /* Colore del testo del placeholder */
-  font-size: 62.5%; /* Imposta la dimensione del font a 10px */
+  --input-border: #ccc; /* Colore del bordo degli input */
+  --button-color: #007bff; /* Colore del pulsante */
+  --button-hover: #0056b3; /* Colore del pulsante al passaggio del mouse */
+  --text-color: #333; /* Colore del testo principale */
+  --placeholder-color: #aaa; /* Colore del testo del placeholder */
+  font-size: 16px; /* Imposta la dimensione del font */
 }
 
 * {
   box-sizing: border-box; /* Include padding e border nella larghezza totale */
-  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
   color: var(--text-color);
@@ -25,14 +24,17 @@ body {
   height: 100vh;
 }
 
-.form-wrapper {
+.container {
   width: 100%;
-  max-width: 40rem; /* Imposta una larghezza massima per il modulo */
+  max-width: 600px; /* Imposta una larghezza massima per la pagina */
+}
+
+.form-wrapper {
   background-color: var(--form-background); /* Colore di sfondo del modulo */
   border: 1px solid var(--input-border); /* Bordo del modulo */
   border-radius: 8px; /* Angoli arrotondati del modulo */
   padding: 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Ombra leggera */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra leggera */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,34 +43,32 @@ body {
 h1 {
   font-size: 2.5rem; /* Dimensione del font per il titolo */
   color: var(--text-color);
-  margin-bottom: 2rem;
-  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .form-group {
-  width: 100%; /* Occupa tutta la larghezza del modulo */
-  margin-bottom: 1.5rem; /* Spazio tra i campi del modulo */
+  width: 100%;
+  margin-bottom: 1rem; /* Spazio tra i campi del modulo */
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .form-group label {
   display: block;
-  font-size: 1.4rem; /* Dimensione del font per le etichette */
+  font-size: 1.2rem; /* Dimensione del font per le etichette */
   margin-bottom: 0.5rem;
   color: var(--text-color);
-  text-align: center;
 }
 
 input,
 select {
   width: 100%;
-  padding: 1rem;
-  font-size: 1.6rem; /* Dimensione del font */
+  padding: 0.75rem;
+  font-size: 1rem; /* Dimensione del font */
   border: 1px solid var(--input-border); /* Colore del bordo */
   border-radius: 4px; /* Angoli arrotondati */
-  box-sizing: border-box;
-  margin-bottom: 1.5rem; /* Spazio tra i campi del modulo */
+  margin-bottom: 1rem; /* Spazio tra i campi del modulo */
   text-align: center; /* Centro il testo e i placeholder */
 }
 
@@ -77,17 +77,35 @@ select::placeholder {
   color: var(--placeholder-color); /* Colore del testo del placeholder */
 }
 
-.btn {
-  font-size: 1.6rem;
-  padding: 1rem 0;
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap; /* Consente la disposizione su più righe */
+  gap: 1rem; /* Spazio tra le checkbox */
   width: 100%;
-  max-width: 30rem; /* Limita la larghezza massima */
+}
+
+.checkbox-column {
+  display: flex;
+  flex-direction: column;
+  width: 48%; /* Due colonne occupano insieme il 100% */
+}
+
+.checkbox-column label {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.btn {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+  max-width: 200px; /* Limita la larghezza massima */
   text-align: center;
   border: none;
   border-radius: 4px;
   background-color: var(--button-color); /* Colore del pulsante */
   color: #ffffff; /* Colore del testo del pulsante */
-  margin-bottom: 1.5rem; /* Spazio tra i pulsanti e gli altri elementi */
+  margin-top: 1rem; /* Spazio sopra il pulsante */
   cursor: pointer;
 }
 
@@ -99,22 +117,4 @@ select::placeholder {
 .btn[disabled] {
   background-color: #b2b2b2; /* Colore del pulsante disabilitato */
   cursor: not-allowed;
-}
-
-.checkbox-container {
-  display: flex;
-  flex-wrap: wrap; /* Consente la disposizione su più righe */
-  gap: 1rem; /* Spazio tra le colonne di checkbox */
-  width: 100%;
-}
-
-.checkbox-column {
-  display: flex;
-  flex-direction: column;
-  width: 48%; /* Due colonne occupano insieme il 100% */
-}
-
-.checkbox-column label {
-  font-size: 1.4rem;
-  color: var(--text-color);
 }
