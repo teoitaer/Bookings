@@ -10,40 +10,40 @@
 </head>
 <body>
   <div class="container">
-    <div id="home" class="form-container">
+    <div class="form-wrapper">
       <h1>PA BOOKINGS</h1>
 
       <form id="booking-form" action="https://script.google.com/macros/s/AKfycbxvQPI7vC-iDfCdY-Vmp2Vfw1LsjIibLEwZNNwmJEjfCJjlyKP9oRpYXEtohnkSdq3z/exec" method="POST">
         <div class="form-group">
-          <label class="lab" for="first_name">First Name</label>
-          <input class="form-control" type="text" id="first_name" name="first_name" placeholder="First Name" required>
+          <label for="first_name">First Name</label>
+          <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
         </div>
 
         <div class="form-group">
-          <label class="lab" for="last_name">Last Name</label>
-          <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+          <label for="last_name">Last Name</label>
+          <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
         </div>
 
         <div class="form-group">
-          <label class="lab" for="email">Email</label>
-          <input class="form-control" type="email" id="email" name="email" placeholder="Email" required>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email" required>
         </div>
 
         <div class="form-group">
-          <label class="lab" for="dropdown">Select a Date</label>
+          <label for="dropdown">Select a Date</label>
           <select id="dropdown" name="option" required>
-            <option value="">Seleziona...</option>
+            <option value="">Select...</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label class="lab" for="Selezione_Materie">Select Subject</label>
-          <input class="form-control" type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required>
+          <label for="Selezione_Materie">Select Subject</label>
+          <input type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required>
         </div>
 
         <div class="form-group">
-          <label class="lab">Select Subjects</label>
-          <div id="checkbox-group">
+          <label>Select Subjects</label>
+          <div class="checkbox-container">
             <div class="checkbox-column">
               <label><input type="checkbox" name="checkbox-subjects" value="AL"> AL</label>
               <label><input type="checkbox" name="checkbox-subjects" value="AGK"> AGK</label>
