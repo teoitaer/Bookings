@@ -41,7 +41,7 @@
           <input type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required>
         </div>
 
-        <div class="form-group">
+        <div class="form-group checkbox-group">
           <label>Select Subjects</label>
           <div class="checkbox-container">
             <div class="checkbox-column">
@@ -66,72 +66,71 @@
 
         <button type="submit" id="submit" class="btn">Submit</button>
       </form>
-
-      <script>
-        // URL dell'app web di Google Apps Script
-        const scriptUrl = 'https://script.google.com/macros/s/AKfycbxvQPI7vC-iDfCdY-Vmp2Vfw1LsjIibLEwZNNwmJEjfCJjlyKP9oRpYXEtohnkSdq3z/exec';
-
-        // Funzione per popolare il dropdown
-        function populateDropdown() {
-          const dropdown = document.getElementById('dropdown');
-          
-          fetch(scriptUrl, { 
-            method: 'GET'
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (Array.isArray(data)) {
-              data.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item;
-                option.textContent = item;
-                dropdown.appendChild(option);
-              });
-            }
-          })
-          .catch(error => console.error('Errore:', error));
-        }
-        
-        // Chiama la funzione per popolare il dropdown quando la pagina viene caricata
-        document.addEventListener('DOMContentLoaded', populateDropdown);
-
-        // Funzione per inviare i dati
-        const form = document.querySelector("#booking-form");
-        const submitButton = document.querySelector("#submit");
-
-        form.addEventListener('submit', e => {
-          e.preventDefault();
-          submitButton.disabled = true;
-
-          // Converti i dati delle checkbox in una stringa separata da virgole
-          const checkboxes = document.querySelectorAll('input[name="checkbox-subjects"]:checked');
-          const selectedSubjects = Array.from(checkboxes).map(cb => cb.value).join(', ');
-
-          // Aggiungi i dati delle checkbox al FormData
-          const requestBody = new FormData(form);
-          requestBody.set('Selezione_Materie', selectedSubjects);
-
-          fetch(scriptUrl, { method: 'POST', body: requestBody })
-            .then(response => {
-              if (response.ok) {
-                return response.text(); // Modificato per gestire la risposta come testo
-              } else {
-                throw new Error('Server responded with an error: ' + response.statusText);
-              }
-            })
-            .then(text => {
-              alert('Success: ' + text);
-              form.reset(); // Resetta il modulo
-              submitButton.disabled = false;
-            })
-            .catch(error => {
-              alert('Error: ' + error.message);
-              submitButton.disabled = false;
-            });
-        });
-      </script>
     </div>
   </div>
+
+  <script>
+    // URL dell'app web di Google Apps Script
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxvQPI7vC-iDfCdY-Vmp2Vfw1LsjIibLEwZNNwmJEjfCJjlyKP9oRpYXEtohnkSdq3z/exec';
+
+    // Funzione per popolare il dropdown
+    function populateDropdown() {
+      const dropdown = document.getElementById('dropdown');
+      
+      fetch(scriptUrl, { 
+        method: 'GET'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item;
+            option.textContent = item;
+            dropdown.appendChild(option);
+          });
+        }
+      })
+      .catch(error => console.error('Errore:', error));
+    }
+    
+    // Chiama la funzione per popolare il dropdown quando la pagina viene caricata
+    document.addEventListener('DOMContentLoaded', populateDropdown);
+
+    // Funzione per inviare i dati
+    const form = document.querySelector("#booking-form");
+    const submitButton = document.querySelector("#submit");
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      submitButton.disabled = true;
+
+      // Converti i dati delle checkbox in una stringa separata da virgole
+      const checkboxes = document.querySelectorAll('input[name="checkbox-subjects"]:checked');
+      const selectedSubjects = Array.from(checkboxes).map(cb => cb.value).join(', ');
+
+      // Aggiungi i dati delle checkbox al FormData
+      const requestBody = new FormData(form);
+      requestBody.set('Selezione_Materie', selectedSubjects);
+
+      fetch(scriptUrl, { method: 'POST', body: requestBody })
+        .then(response => {
+          if (response.ok) {
+            return response.text(); // Modificato per gestire la risposta come testo
+          } else {
+            throw new Error('Server responded with an error: ' + response.statusText);
+          }
+        })
+        .then(text => {
+          alert('Success: ' + text);
+          form.reset(); // Resetta il modulo
+          submitButton.disabled = false;
+        })
+        .catch(error => {
+          alert('Error: ' + error.message);
+          submitButton.disabled = false;
+        });
+    });
+  </script>
 </body>
 </html>
-
