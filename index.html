@@ -49,26 +49,25 @@
           <input class="form-control form-control-sm" type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
       </form>
 
       <script>
         // URL dell'app web di Google Apps Script
-        var scriptUrl = 'https://script.google.com/macros/s/AKfycbwOJAK9U7gZoXfnW7RY5FH4Vs_bBYO9tm0GNpg6juiXFFBeF4L52UzbkFSBH0Pnr6YX/exec';
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbwOJAK9U7gZoXfnW7RY5FH4Vs_bBYO9tm0GNpg6juiXFFBeF4L52UzbkFSBH0Pnr6YX/exec';
 
         // Funzione per popolare il dropdown
         function populateDropdown() {
-          var dropdown = document.getElementById('dropdown');
+          const dropdown = document.getElementById('dropdown');
           
           fetch(scriptUrl, { 
-            method: 'GET' // Assicurati che il metodo sia GET
+            method: 'GET'
           })
           .then(response => response.json())
           .then(data => {
-            // Assicurati che i dati siano validi
             if (Array.isArray(data)) {
               data.forEach(item => {
-                var option = document.createElement('option');
+                const option = document.createElement('option');
                 option.value = item;
                 option.textContent = item;
                 dropdown.appendChild(option);
@@ -82,42 +81,32 @@
         document.addEventListener('DOMContentLoaded', populateDropdown);
 
         // Funzione per inviare i dati
-       
+        const form = document.querySelector("#booking-form");
+        const submitButton = document.querySelector("#submit");
 
-
-        const form = document.querySelector("#form");
-  const submitButton = document.querySelector("#submit");
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwOJAK9U7gZoXfnW7RY5FH4Vs_bBYO9tm0GNpg6juiXFFBeF4L52UzbkFSBH0Pnr6YX/exec';
-
-  form.addEventListener('submit', e => {
-    submitButton.disabled = true;
-    e.preventDefault();
-    let requestBody = new FormData(form);
-    fetch(scriptURL, { method: 'POST', body: requestBody })
-      .then(response => {
-        if (response.ok) {
-          return response.text(); // Modificato per gestire la risposta come testo
-        } else {
-          throw new Error('Server responded with an error: ' + response.statusText);
-        }
-      })
-      .then(text => {
-        alert('Success: ' + text);
-        submitButton.disabled = false;
-      })
-      .catch(error => {
-        alert('Error: ' + error.message);
-        submitButton.disabled = false;
-      });
-  });
-
-
-
-        
+        form.addEventListener('submit', e => {
+          submitButton.disabled = true;
+          e.preventDefault();
+          const requestBody = new FormData(form);
+          fetch(scriptUrl, { method: 'POST', body: requestBody })
+            .then(response => {
+              if (response.ok) {
+                return response.text(); // Modificato per gestire la risposta come testo
+              } else {
+                throw new Error('Server responded with an error: ' + response.statusText);
+              }
+            })
+            .then(text => {
+              alert('Success: ' + text);
+              submitButton.disabled = false;
+            })
+            .catch(error => {
+              alert('Error: ' + error.message);
+              submitButton.disabled = false;
+            });
+        });
       </script>
     </div>
   </div>
-</body>
-</html>
 </body>
 </html>
