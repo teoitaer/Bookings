@@ -26,6 +26,41 @@
       opacity: 0.5;
       pointer-events: none;
     }
+
+    /* Styles for the info button and popup */
+    .info-button {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 20px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      max-width: 80%;
+      max-height: 80%;
+      overflow-y: auto;
+    }
+
+    .popup-close {
+      float: right;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -33,10 +68,26 @@
     <div class="form-wrapper">
       <h1>PA BOOKINGS</h1>
 
-      <!-- Checkbox per confermare le attività completate -->
+      <!-- Checkbox for confirming completed activities with info button -->
       <div class="form-group">
-        <label>I confirm having completed all the mandatory activities on CAE/Evionica Portal</label>
-        <input type="checkbox" id="confirm-checkbox" />
+        <label>
+          I confirm having completed all the mandatory activities on CAE/Evionica Portal
+          <input type="checkbox" id="confirm-checkbox" />
+          <span class="info-button" id="info-button">i</span>
+        </label>
+      </div>
+
+      <!-- Popup for detailed explanation -->
+      <div id="info-popup" class="popup">
+        <span class="popup-close" id="popup-close">&times;</span>
+        <h2>Mandatory Activities</h2>
+        <p>Before proceeding with the PA BOOKINGS, please ensure you have completed all the mandatory activities on the CAE/Evionica Portal. These activities are crucial for your progression and include:</p>
+        <ul>
+          <li>Completing all required online modules</li>
+          <li>Submitting necessary documentation</li>
+          <li>Passing any preliminary assessments</li>
+        </ul>
+        <p>If you have not completed these activities, please do so before submitting this booking form. Failure to complete these mandatory activities may result in delays or cancellation of your booking.</p>
       </div>
 
       <form id="booking-form" action="https://script.google.com/macros/s/AKfycbwTOdBruFE1-vytFbSom_ygr4S8mLzK7U0PuQ6MGhZFT3bcoEGOnhNkNXOAItkzI-Xv/exec" method="POST">
@@ -194,6 +245,25 @@
         .finally(() => {
           loadingMessage.style.display = 'none';
         });
+    });
+
+    // New code for the info button functionality
+    const infoButton = document.getElementById('info-button');
+    const infoPopup = document.getElementById('info-popup');
+    const popupClose = document.getElementById('popup-close');
+
+    infoButton.addEventListener('click', function() {
+      infoPopup.style.display = 'block';
+    });
+
+    popupClose.addEventListener('click', function() {
+      infoPopup.style.display = 'none';
+    });
+
+    window.addEventListener('click', function(event) {
+      if (event.target == infoPopup) {
+        infoPopup.style.display = 'none';
+      }
     });
   </script>
 </body>
