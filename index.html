@@ -20,6 +20,12 @@
       border-radius: 5px;
       z-index: 1000;
     }
+
+    /* Stile per disabilitare visivamente i campi */
+    .disabled-overlay {
+      opacity: 0.5;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -27,56 +33,63 @@
     <div class="form-wrapper">
       <h1>PA BOOKINGS</h1>
 
+      <!-- Checkbox per confermare le attività completate -->
+      <div class="form-group">
+        <label><input type="checkbox" id="confirm-checkbox" /> I confirm having completed all the mandatory activities</label>
+      </div>
+
       <form id="booking-form" action="https://script.google.com/macros/s/AKfycbwTOdBruFE1-vytFbSom_ygr4S8mLzK7U0PuQ6MGhZFT3bcoEGOnhNkNXOAItkzI-Xv/exec" method="POST">
         
-        <div class="form-group">
-          <label for="first_name">First Name</label>
-          <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
-        </div>
+        <div id="form-fields" class="disabled-overlay">
+          <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" placeholder="First Name" required disabled>
+          </div>
 
-        <div class="form-group">
-          <label for="last_name">Last Name</label>
-          <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
-        </div>
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" placeholder="Last Name" required disabled>
+          </div>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Email" required>
-        </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email" required disabled>
+          </div>
 
-        <div class="form-group">
-          <label for="dropdown">Select a Date</label>
-          <select id="dropdown" name="option" required>
-            <option value="">Select...</option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label for="dropdown">Select a Date</label>
+            <select id="dropdown" name="option" required disabled>
+              <option value="">Select...</option>
+            </select>
+          </div>
 
-        <div class="form-group">
-          <label>Select Subject</label>
-          <div class="checkbox-container">
-            <div class="checkbox-group">
-              <label><input type="checkbox" name="subjects" value="AL"> AL</label>
-              <label><input type="checkbox" name="subjects" value="AGK"> AGK</label>
-              <label><input type="checkbox" name="subjects" value="POF"> POF</label>
-              <label><input type="checkbox" name="subjects" value="COM"> COM</label>
-              <label><input type="checkbox" name="subjects" value="MET"> MET</label>
-              <label><input type="checkbox" name="subjects" value="FPP"> FPP</label>
-              <label><input type="checkbox" name="subjects" value="PERF"> PERF</label>
-              <label><input type="checkbox" name="subjects" value="INS"> INS</label>
-              <label><input type="checkbox" name="subjects" value="GNAV"> GNAV</label>
-              <label><input type="checkbox" name="subjects" value="RNAV"> RNAV</label>
-              <label><input type="checkbox" name="subjects" value="HPL"> HPL</label>
-              <label><input type="checkbox" name="subjects" value="OPS"> OPS</label>
-              <label><input type="checkbox" name="subjects" value="MB"> MB</label>
+          <div class="form-group">
+            <label>Select Subject</label>
+            <div class="checkbox-container">
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="subjects" value="AL" disabled> AL</label>
+                <label><input type="checkbox" name="subjects" value="AGK" disabled> AGK</label>
+                <label><input type="checkbox" name="subjects" value="POF" disabled> POF</label>
+                <label><input type="checkbox" name="subjects" value="COM" disabled> COM</label>
+                <label><input type="checkbox" name="subjects" value="MET" disabled> MET</label>
+                <label><input type="checkbox" name="subjects" value="FPP" disabled> FPP</label>
+                <label><input type="checkbox" name="subjects" value="PERF" disabled> PERF</label>
+                <label><input type="checkbox" name="subjects" value="INS" disabled> INS</label>
+                <label><input type="checkbox" name="subjects" value="GNAV" disabled> GNAV</label>
+                <label><input type="checkbox" name="subjects" value="RNAV" disabled> RNAV</label>
+                <label><input type="checkbox" name="subjects" value="HPL" disabled> HPL</label>
+                <label><input type="checkbox" name="subjects" value="OPS" disabled> OPS</label>
+                <label><input type="checkbox" name="subjects" value="MB" disabled> MB</label>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <input type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required readonly>
-        </div>
+          <div class="form-group">
+            <input type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required readonly disabled>
+          </div>
 
-        <button type="submit" id="submit" class="btn">Submit</button>
+          <button type="submit" id="submit" class="btn" disabled>Submit</button>
+        </div>
       </form>
     </div>
   </div>
@@ -85,6 +98,19 @@
   <div id="loading-message">Sending your data, please wait...</div>
 
   <script>
+    // Funzione per abilitare/disabilitare i campi del form e gestire l'effetto "ombra"
+    const confirmCheckbox = document.getElementById('confirm-checkbox');
+    const formFieldsContainer = document.getElementById('form-fields');
+    const formFields = document.querySelectorAll('#booking-form input, #booking-form select, #booking-form button');
+
+    confirmCheckbox.addEventListener('change', function() {
+      const isChecked = confirmCheckbox.checked;
+      formFieldsContainer.classList.toggle('disabled-overlay', !isChecked); // Aggiunge/rimuove la classe
+      formFields.forEach(field => {
+        field.disabled = !isChecked;
+      });
+    });
+
     // URL dell'app web di Google Apps Script
     const scriptUrl = 'https://script.google.com/macros/s/AKfycbwTOdBruFE1-vytFbSom_ygr4S8mLzK7U0PuQ6MGhZFT3bcoEGOnhNkNXOAItkzI-Xv/exec';
 
@@ -108,8 +134,7 @@
       })
       .catch(error => console.error('Errore:', error));
     }
-    
-    // Chiama la funzione per popolare il dropdown quando la pagina viene caricata
+
     document.addEventListener('DOMContentLoaded', populateDropdown);
 
     // Funzione per aggiornare la textbox con le checkbox selezionate
@@ -119,51 +144,46 @@
       document.getElementById('Selezione_Materie').value = selectedSubjects;
     }
 
-    // Aggiungi listener a tutte le checkbox
     document.querySelectorAll('input[name="subjects"]').forEach(checkbox => {
       checkbox.addEventListener('change', updateSubjectTextbox);
     });
 
-    // Funzione per verificare se almeno una checkbox è selezionata
     function validateCheckboxes() {
       return document.querySelectorAll('input[name="subjects"]:checked').length > 0;
     }
 
-    // Funzione per inviare i dati
     const form = document.querySelector("#booking-form");
     const submitButton = document.querySelector("#submit");
     const loadingMessage = document.getElementById("loading-message");
 
     form.addEventListener('submit', e => {
       if (!validateCheckboxes()) {
-        e.preventDefault(); // Impedisce l'invio del modulo
+        e.preventDefault();
         alert('Please select at least one subject.');
         return;
       }
 
       e.preventDefault();
       submitButton.disabled = true;
-      loadingMessage.style.display = 'block'; // Mostra il messaggio di attesa
+      loadingMessage.style.display = 'block';
 
-      // Converti i dati delle checkbox in una stringa separata da virgole
       const checkboxes = document.querySelectorAll('input[name="subjects"]:checked');
       const selectedSubjects = Array.from(checkboxes).map(cb => cb.value).join(', ');
 
-      // Aggiungi i dati delle checkbox al FormData
       const requestBody = new FormData(form);
       requestBody.set('Selezione_Materie', selectedSubjects);
 
       fetch(scriptUrl, { method: 'POST', body: requestBody })
         .then(response => {
           if (response.ok) {
-            return response.text(); // Modificato per gestire la risposta come testo
+            return response.text();
           } else {
             throw new Error('Server responded with an error: ' + response.statusText);
           }
         })
         .then(text => {
           alert('Success: ' + text);
-          form.reset(); // Resetta il modulo
+          form.reset();
           submitButton.disabled = false;
         })
         .catch(error => {
@@ -171,7 +191,7 @@
           submitButton.disabled = false;
         })
         .finally(() => {
-          loadingMessage.style.display = 'none'; // Nasconde il messaggio di attesa
+          loadingMessage.style.display = 'none';
         });
     });
   </script>
