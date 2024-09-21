@@ -18,7 +18,7 @@
           I confirm having completed all the mandatory activities on CAE/Evionica Portal
         </label>
         <input type="checkbox" id="confirm-checkbox" />
-        <span class="info-button" id="info-button">?</span> <!-- Punto interrogativo grigio -->
+        <span class="info-button" id="info-button">?</span>
       </div>
 
       <!-- Popup for detailed explanation -->
@@ -34,7 +34,7 @@
         <p>If you have not completed these activities, please do so before submitting this booking form. Failure to complete these mandatory activities may result in delays or cancellation of your booking.</p>
       </div>
 
-      <form id="booking-form" action="https://script.google.com/macros/s/AKfycbwTOdBruFE1-vytFbSom_ygr4S8mLzK7U0PuQ6MGhZFT3bcoEGOnhNkNXOAItkzI-Xv/exec" method="POST">
+      <form id="booking-form" action="hhttps://script.google.com/macros/s/AKfycbzRA_r5G4x0sBO1uKK62H6RxAUeGL0zovuOwv-6jpwEECzYVZ2LOkaePvNQh50GPD1M/exec" method="POST">
         
         <div id="form-fields" class="disabled-overlay">
           <div class="form-group">
@@ -55,6 +55,13 @@
           <div class="form-group">
             <label for="dropdown">Select a Date</label>
             <select id="dropdown" name="option" required disabled>
+              <option value="">Select...</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="exam-date-dropdown">Select Official Exam Date</label>
+            <select id="exam-date-dropdown" name="exam_date_option" required disabled>
               <option value="">Select...</option>
             </select>
           </div>
@@ -107,30 +114,45 @@
       });
     });
 
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbwTOdBruFE1-vytFbSom_ygr4S8mLzK7U0PuQ6MGhZFT3bcoEGOnhNkNXOAItkzI-Xv/exec';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbzRA_r5G4x0sBO1uKK62H6RxAUeGL0zovuOwv-6jpwEECzYVZ2LOkaePvNQh50GPD1M/exec';
 
-    // Funzione per popolare il dropdown
-    function populateDropdown() {
+    // Funzione per popolare i dropdown
+    function populateDropdowns() {
       const dropdown = document.getElementById('dropdown');
-      
-      fetch(scriptUrl, { 
-        method: 'GET'
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          data.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item;
-            option.textContent = item;
-            dropdown.appendChild(option);
-          });
-        }
-      })
-      .catch(error => console.error('Errore:', error));
+      const examDateDropdown = document.getElementById('exam-date-dropdown');
+
+      // Fetch per la prima dropdown
+      fetch(`${scriptUrl}?type=dates`)
+        .then(response => response.json())
+        .then(data => {
+          if (Array.isArray(data)) {
+            data.forEach(item => {
+              const option = document.createElement('option');
+              option.value = item;
+              option.textContent = item;
+              dropdown.appendChild(option);
+            });
+          }
+        })
+        .catch(error => console.error('Errore:', error));
+
+      // Fetch per la seconda dropdown
+      fetch(`${scriptUrl}?type=exam_dates`)
+        .then(response => response.json())
+        .then(data => {
+          if (Array.isArray(data)) {
+            data.forEach(item => {
+              const option = document.createElement('option');
+              option.value = item;
+              option.textContent = item;
+              examDateDropdown.appendChild(option);
+            });
+          }
+        })
+        .catch(error => console.error('Errore:', error));
     }
 
-    document.addEventListener('DOMContentLoaded', populateDropdown);
+    document.addEventListener('DOMContentLoaded', populateDropdowns);
 
     // Funzione per aggiornare la textbox con le checkbox selezionate
     function updateSubjectTextbox() {
@@ -179,6 +201,7 @@
         .then(text => {
           alert('Success: ' + text);
           form.reset();
+          confirmCheckbox.checked = false; // Reset della checkbox
           submitButton.disabled = false;
         })
         .catch(error => {
