@@ -21,7 +21,7 @@
         <span class="info-button" id="info-button">?</span>
       </div>
 
-     <!-- Popup for detailed explanation -->
+      <!-- Popup for detailed explanation -->
       <div id="info-popup" class="popup">
         <h2>Mandatory Activities</h2>
         <p>Before proceeding with the Theory release booking, please ensure you have completed all the mandatory activities on the CAE/Evionica Portal. These activities include:</p>
@@ -44,7 +44,7 @@
         <button id="popup-close-button">Close</button>
       </div>
 
-      <form id="booking-form" action="https://script.google.com/macros/s/AKfycbx4_pCC_fKbID7u_JXPalHK0AGqwZPpwMUOX1iMCvfSM7O4muPUKofYDRRzMVfaxfhd/exec" method="POST">
+      <form id="booking-form" action="https://script.google.com/macros/s/AKfycbzwXnzhAkbmJSR68BcqQllkiK2N-fb1UTRo5gXZNxQj55mOogIs8dRD9D2zojK1Syi2/exec" method="POST">
         <div id="form-fields" class="disabled-overlay">
           <div class="form-group">
             <label for="first_name">First Name</label>
@@ -72,6 +72,8 @@
             <label for="exam-date-dropdown">Select Official Exam Date</label>
             <select id="exam-date-dropdown" name="exam_date_option" required disabled>
               <option value="">Select...</option>
+              <option value="Not going to San Marino">Not going to San Marino</option>
+              <!-- Add other options here -->
             </select>
           </div>
 
@@ -100,6 +102,11 @@
             <input type="text" id="Selezione_Materie" name="Selezione_Materie" placeholder="Selezione Materie" required readonly disabled>
           </div>
 
+          <div class="form-group">
+            <label for="notes">Notes</label>
+            <input type="text" id="notes" name="notes" placeholder="Additional Notes" disabled>
+          </div>
+
           <button type="submit" id="submit" class="btn" disabled>Submit</button>
         </div>
       </form>
@@ -110,10 +117,11 @@
   <div id="loading-message">Sending your data, please wait...</div>
 
   <script>
-    // Funzione per abilitare/disabilitare i campi del form e gestire l'effetto "ombra"
     const confirmCheckbox = document.getElementById('confirm-checkbox');
     const formFieldsContainer = document.getElementById('form-fields');
     const formFields = document.querySelectorAll('#booking-form input, #booking-form select, #booking-form button');
+    const notesField = document.getElementById('notes');
+    const examDateDropdown = document.getElementById('exam-date-dropdown');
 
     confirmCheckbox.addEventListener('change', function() {
       const isChecked = confirmCheckbox.checked;
@@ -123,14 +131,11 @@
       });
     });
 
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbx4_pCC_fKbID7u_JXPalHK0AGqwZPpwMUOX1iMCvfSM7O4muPUKofYDRRzMVfaxfhd/exec';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbzwXnzhAkbmJSR68BcqQllkiK2N-fb1UTRo5gXZNxQj55mOogIs8dRD9D2zojK1Syi2/exec';
 
-    // Funzione per popolare i dropdown
     function populateDropdowns() {
       const dropdown = document.getElementById('dropdown');
-      const examDateDropdown = document.getElementById('exam-date-dropdown');
 
-      // Fetch per la prima dropdown
       fetch(`${scriptUrl}?type=dates`)
         .then(response => response.json())
         .then(data => {
@@ -145,7 +150,6 @@
         })
         .catch(error => console.error('Errore:', error));
 
-      // Fetch per la seconda dropdown
       fetch(`${scriptUrl}?type=exam_dates`)
         .then(response => response.json())
         .then(data => {
@@ -163,7 +167,6 @@
 
     document.addEventListener('DOMContentLoaded', populateDropdowns);
 
-    // Funzione per aggiornare la textbox con le checkbox selezionate
     function updateSubjectTextbox() {
       const checkboxes = document.querySelectorAll('input[name="subjects"]:checked');
       const selectedSubjects = Array.from(checkboxes).map(cb => cb.parentElement.textContent.trim()).join(', ');
@@ -178,6 +181,10 @@
       return document.querySelectorAll('input[name="subjects"]:checked').length > 0;
     }
 
+    function validateNotes() {
+      return examDateDropdown.value !== "Not going to San Marino" || notesField.value.trim() !== "";
+    }
+
     const form = document.querySelector("#booking-form");
     const submitButton = document.querySelector("#submit");
     const loadingMessage = document.getElementById("loading-message");
@@ -186,6 +193,12 @@
       if (!validateCheckboxes()) {
         e.preventDefault();
         alert('Please select at least one subject.');
+        return;
+      }
+
+      if (!validateNotes()) {
+        e.preventDefault();
+        alert('Notes are required if you select "Not going to San Marino".');
         return;
       }
 
@@ -222,7 +235,6 @@
         });
     });
 
-    // Funzionalità del pulsante info
     const infoButton = document.getElementById('info-button');
     const infoPopup = document.getElementById('info-popup');
     const popupCloseButton = document.getElementById('popup-close-button');
@@ -236,8 +248,16 @@
     });
 
     window.addEventListener('click', function(event) {
-      if (event.target == infoPopup) {
+      if (event.target === infoPopup) {
         infoPopup.style.display = 'none';
+      }
+    });
+
+    examDateDropdown.addEventListener('change', function() {
+      if (this.value === "Not going to San Marino") {
+        notesField.required = true;
+      } else {
+        notesField.required = false;
       }
     });
   </script>
