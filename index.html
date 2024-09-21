@@ -21,21 +21,30 @@
         <span class="info-button" id="info-button">?</span>
       </div>
 
-      <!-- Popup for detailed explanation -->
+     <!-- Popup for detailed explanation -->
       <div id="info-popup" class="popup">
-        <span class="popup-close" id="popup-close">&times;</span>
         <h2>Mandatory Activities</h2>
-        <p>Before proceeding with the PA BOOKINGS, please ensure you have completed all the mandatory activities on the CAE/Evionica Portal. These activities are crucial for your progression and include:</p>
+        <p>Before proceeding with the Theory release booking, please ensure you have completed all the mandatory activities on the CAE/Evionica Portal. These activities include:</p>
         <ul>
-          <li>Completing all required online modules</li>
-          <li>Submitting necessary documentation</li>
-          <li>Passing any preliminary assessments</li>
+          <li>Classroom ground schools 100% attendance</li>
         </ul>
-        <p>If you have not completed these activities, please do so before submitting this booking form. Failure to complete these mandatory activities may result in delays or cancellation of your booking.</p>
+        <p> and </p>
+        <ul>
+          <li>CAE activities</li>
+          <li>CAE Videos</li>
+          <li>CAE Subject test PASS</li>
+        </ul>
+        <p> or </p>
+        <ul>
+          <li>Evionica subject complete with Completion Certificate</li>
+        </ul>
+        <p>If you have not completed these activities, please do so before submitting this booking form. Failure to complete these mandatory activities may result in delays or cancellation of your booking.
+        We also suggest to take pictures of completed activities in case of online portal bugs.</p>
+        <p> Refer to the ATPL SOPs document and if you have questions, feel free to contact us at atpl@professionalaviation.it </p>
+        <button id="popup-close-button">Close</button>
       </div>
 
       <form id="booking-form" action="https://script.google.com/macros/s/AKfycbx4_pCC_fKbID7u_JXPalHK0AGqwZPpwMUOX1iMCvfSM7O4muPUKofYDRRzMVfaxfhd/exec" method="POST">
-        
         <div id="form-fields" class="disabled-overlay">
           <div class="form-group">
             <label for="first_name">First Name</label>
@@ -216,13 +225,13 @@
     // Funzionalità del pulsante info
     const infoButton = document.getElementById('info-button');
     const infoPopup = document.getElementById('info-popup');
-    const popupClose = document.getElementById('popup-close');
+    const popupCloseButton = document.getElementById('popup-close-button');
 
     infoButton.addEventListener('click', function() {
       infoPopup.style.display = 'block';
     });
 
-    popupClose.addEventListener('click', function() {
+    popupCloseButton.addEventListener('click', function() {
       infoPopup.style.display = 'none';
     });
 
@@ -234,5 +243,4 @@
   </script>
 </body>
 </html>
-
 
